@@ -28,21 +28,21 @@ public class QRCodePreProcessorIml extends AbstractBaseQRCodeService implements 
 		// convert to gray image
 		Imgproc.cvtColor(sourceImage, grayImage, Imgproc.COLOR_RGB2GRAY);
 		if (logger.isDebugEnabled()) {
-			saveImageToDisk(qrCodeRecogitionProperties.getDebugImagePath(), "gray_image.jpg", grayImage);
+			saveImageToDisk(getDebugFolderPath(), "gray_image.jpg", grayImage);
 		}
 		//Gaussion blur and threshold
 		Mat gaussianBlurImage =  new Mat(),thresholdImage =  new Mat();
 		Imgproc.GaussianBlur(grayImage, gaussianBlurImage, new Size(3,3), 0);
 		Imgproc.threshold(gaussianBlurImage, thresholdImage, 50, 255, Imgproc.THRESH_BINARY|Imgproc.THRESH_OTSU);
 		if (logger.isDebugEnabled()) {
-			saveImageToDisk(qrCodeRecogitionProperties.getDebugImagePath(), "blur_and_threshold_image.jpg", thresholdImage);
+			saveImageToDisk(getDebugFolderPath(), "blur_and_threshold_image.jpg", thresholdImage);
 		}
 		// morphology
 		Mat morphologyImage =  new Mat();
 		Mat blur = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size(new double[]{5.0,5.0}));
 		Imgproc.morphologyEx(thresholdImage, morphologyImage, Imgproc.MORPH_OPEN, blur,new Point(-1,-1),5);
 		if (logger.isDebugEnabled()) {
-			saveImageToDisk(qrCodeRecogitionProperties.getDebugImagePath(), "morphology_image.jpg", morphologyImage);
+			saveImageToDisk(getDebugFolderPath(), "morphology_image.jpg", morphologyImage);
 		}
 		return morphologyImage;
 	}
