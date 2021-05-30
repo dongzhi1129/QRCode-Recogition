@@ -1,1 +1,18 @@
-
+server:
+  servlet:
+    context-path: /qrcodeapis
+spring:
+  mvc:
+    static-path-pattern: /**
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${qrcode.resource.path.prefix}
+logging:  level:
+     root: info     com.mine.qrcode.*: debug
+qrcode:
+  resource:
+    path:
+      prefix: E:/Project/TEST/test
+      source-image-path: /src
+      debug-image-path: /debug
+      achieved-qrcode-path: /qrcode

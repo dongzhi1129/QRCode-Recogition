@@ -21,6 +21,10 @@ public class ApiResult<T> {
 	@ApiModelProperty(name = "page", required = false, hidden = true)
 	private Page page;
 
+	public ApiResult() {
+		super();
+	}
+
 	public ApiResult(Integer status, String message) {
 		super();
 		this.status = status;
@@ -72,6 +76,29 @@ public class ApiResult<T> {
 		this.rows = rows;
 		return this;
 	}
+	
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public T getRows() {
+		return rows;
+	}
+
+
 
 	public static class Page {
 
